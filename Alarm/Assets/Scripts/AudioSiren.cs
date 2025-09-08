@@ -102,7 +102,6 @@ public class AudioSiren : MonoBehaviour
             }
         }
     }
-
     private void ManageAudioPlayback()
     {
         if (_currentState == AudioState.Playing)

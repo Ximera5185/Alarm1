@@ -12,9 +12,17 @@ public class House : MonoBehaviour
 
     private void Initialization()
     {
-        Vector3 triggerZonePosition = new Vector3(9, 2, -2);
+        float triggerZonePositionX = 9f;
+        float triggerZonePositionY = 2f;
+        float triggerZonePositionZ = -2f;
 
-        Vector3 triggerZoneScale = new Vector3(9, 1, 8);
+        float triggerZoneScaleX = 9f;
+        float triggerZoneScaleY = 1f;
+        float triggerZoneScaleZ = 8f;
+
+        Vector3 triggerZonePosition = new Vector3(triggerZonePositionX, triggerZonePositionY, triggerZonePositionZ);
+
+        Vector3 triggerZoneScale = new Vector3(triggerZoneScaleX, triggerZoneScaleY, triggerZoneScaleZ);
 
         CreateObject(ObjectNameAlarm, typeof(AudioSiren), Vector3.zero, Quaternion.identity, Vector3.zero);
 
