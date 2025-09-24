@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    private const string PathPrefabCharacter = "Prefabs/Character";
     private const string PathPrefabHome = "Prefabs/Home";
 
     private void Awake()
@@ -32,7 +31,6 @@ public class SpawnManager : MonoBehaviour
 
         GameObject home = Instantiate(LoadPrefab(PathPrefabHome), new Vector3(positionHouseX, positionHouseY, positionHouseZ), Quaternion.Euler(rotationHouseX, rotationHouseY, rotationHouseZ));
 
-        Instantiate(LoadPrefab(PathPrefabCharacter), transform.position, Quaternion.identity);
 
         home.AddComponent<House>();
     }

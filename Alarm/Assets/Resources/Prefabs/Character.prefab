@@ -185,10 +185,19 @@ PrefabInstance:
       addedObject: {fileID: 8684909476597400493}
     - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: 6786af715083f1748af5bfcf8ac71190, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 941050059446708188}
+      addedObject: {fileID: 4800519003029877516}
     - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: 6786af715083f1748af5bfcf8ac71190, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4800519003029877516}
+      addedObject: {fileID: 4584231798452340277}
+    - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: 6786af715083f1748af5bfcf8ac71190, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7950675344576859439}
+    - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: 6786af715083f1748af5bfcf8ac71190, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4112858685922859734}
+    - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: 6786af715083f1748af5bfcf8ac71190, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7819054771289194386}
   m_SourcePrefab: {fileID: 100100000, guid: 6786af715083f1748af5bfcf8ac71190, type: 3}
 --- !u!1 &4692527782687804726 stripped
 GameObject:
@@ -242,31 +251,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &941050059446708188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4692527782687804726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58ce64f9b341d9546a826408a4667c69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _runSpeed: 7
-  _speed: 3
-  _gravity: -50
-  _jumpHeight: 2
-  _currentSpeed: 0
-  _lerpSpeedLeftShift: 10
-  _lerpSpeedInertia: 1
-  _groundCheckDistance: 0.1
-  _isGrounded: 1
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 8
-  _isJumping: 0
 --- !u!114 &4800519003029877516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +268,68 @@ MonoBehaviour:
   _sensitivityVert: 9
   _minVert: -45
   _maxVert: 45
+--- !u!114 &4584231798452340277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692527782687804726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f3334094743f243a265ac6aa3b25f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 8
+  _groundDistance: 0.1
+--- !u!114 &7950675344576859439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692527782687804726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2ae1935a20af647b4f647ed5375109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4112858685922859734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692527782687804726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cba0a4cf376d594abb10f3fcdfa2f31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 7819054771289194386}
+  _minSpeed: 0
+  _runSpeed: 7
+  _speed: 3
+  _currentSpeed: 0
+  _gravity: -20
+  _jumpHeight: 2
+  _lerpSpeedLeftShift: 3
+  _lerpSpeedInertia: 4
+  _isJumping: 0
+--- !u!114 &7819054771289194386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692527782687804726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c55ceea8d3c2964428d921b2f97064c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6593550757020387196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8879528566716807029, guid: 6786af715083f1748af5bfcf8ac71190, type: 3}
