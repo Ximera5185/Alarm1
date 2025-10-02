@@ -1,52 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
     private const string HorizontalAxis = "Horizontal";
     private const string VerticalAxis = "Vertical";
+    private const string JumpButtonName = "Jump";
 
-    public float deltaX { get; private set; }
-    public float deltaZ { get; private set; }
+    public event Action OnJump;
+    public event Action OnLeftShift;
+    public event Action OnLeftShiftReleased;
 
+    public float DeltaX { get; private set; }
+    public float DeltaZ { get; private set; }
     public bool IsMovingHorizontallyOrVertically { get; private set; }
-
-    public bool IsJump { get; private set; }
-
-    public bool IsLeftShift { get; private set; }
 
     public Vector3 Direction { get; private set; }
 
     void Update()
     {
-        IsMovingHorizontallyOrVertically = Mathf.Abs(deltaX) > 0 || Mathf.Abs(deltaZ) > 0;
+        IsMovingHorizontallyOrVertically = Mathf.Abs(DeltaX) > 0 || Mathf.Abs(DeltaZ) > 0;
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            IsJump = true;
-        }
-        else
-        {
-            IsJump = false;
-        }
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            IsLeftShift = true;
-        }
-        else
-        {
-            IsLeftShift = false;
-        }
+        CheckJumpInput();
 
-        deltaX = Input.GetAxis(HorizontalAxis);
+        CheckCurrentStateLeftShift();
+        DeltaX = Input.GetAxis(HorizontalAxis);
+        DeltaZ = Input.GetAxis(VerticalAxis);
 
-        deltaZ = Input.GetAxis(VerticalAxis);
-
-        Direction = new Vector3(deltaX, 0, deltaZ);
+        Direction = new Vector3(DeltaX, 0, DeltaZ);
 
         Direction = transform.TransformDirection(Direction);
     }
 
-    //систему событий
+    private void CheckJumpInput()
+    {
+        if (Input.GetButtonDown(JumpButtonName))
+        {
+            OnJump?.Invoke();
+        }
+    }
+
+    private void CheckCurrentStateLeftShift() 
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            OnLeftShift?.Invoke();
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            OnLeftShiftReleased?.Invoke();
+        }
+    }
 }
