@@ -359,9 +359,7 @@
 "Assets/Scripts/CharacterAnimator.cs"
 "Assets/Scripts/CharacterMovement.cs"
 "Assets/Scripts/GroundDetector.cs"
-"Assets/Scripts/House.cs"
 "Assets/Scripts/InputReader.cs"
-"Assets/Scripts/levelGenerator.cs"
 "Assets/Scripts/MouseLook.cs"
 "Assets/Scripts/TriggerZoneHandler.cs"
 -langversion:9.0

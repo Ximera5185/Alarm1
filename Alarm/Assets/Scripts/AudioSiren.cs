@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -6,18 +7,19 @@ public class AudioSiren : MonoBehaviour
 {
     private const string PlayerTag = "Player";
 
-    private TriggerZoneHandler _triggerZoneHandler;
+    [SerializeField] private TriggerZoneHandler _triggerZoneHandler;
+
     private AudioSource _audioSource;
     private AudioClip _audioClip;
+    private Coroutine _coroutine;
 
     private float _minVolume = 0f;
     private float _maxVolume = 1f;
     private float _lerpVolume = 0.1f;
     private float _targetVolume;
 
-    private enum AudioState { Stopped, Playing }
-
     private AudioState _currentState = AudioState.Stopped;
+    private enum AudioState { Stopped, Playing }
 
     private void Awake()
     {
@@ -27,13 +29,6 @@ public class AudioSiren : MonoBehaviour
     void Start()
     {
         InitializeTriggerZoneHandler();
-    }
-
-    private void Update()
-    {
-        UpdateVolume(ref _audioSource);
-
-        ManageAudioPlayback();
     }
 
     private void Initialization()
@@ -54,7 +49,7 @@ public class AudioSiren : MonoBehaviour
 
     private void InitializeTriggerZoneHandler()
     {
-        _triggerZoneHandler = FindObjectOfType<TriggerZoneHandler>();
+        _triggerZoneHandler = GetComponent<TriggerZoneHandler>();
 
         if (_triggerZoneHandler != null)
         {
@@ -68,7 +63,7 @@ public class AudioSiren : MonoBehaviour
     {
         if (other.CompareTag(PlayerTag))
         {
-            _currentState = AudioState.Playing;
+            PlaySound();
         }
     }
 
@@ -76,7 +71,7 @@ public class AudioSiren : MonoBehaviour
     {
         if (other.CompareTag(PlayerTag))
         {
-            _currentState = AudioState.Stopped;
+            StopSound();
         }
     }
 
@@ -84,9 +79,18 @@ public class AudioSiren : MonoBehaviour
     {
         _targetVolume = _maxVolume;
 
-        if (_audioSource != null && _audioSource.isPlaying == false)
+        if (_coroutine != null)
         {
-            _audioSource.Play();
+            StopCoroutine(_coroutine);
+
+            _coroutine = null;
+        }
+
+        _audioSource.Play();
+
+        if (_coroutine == null)
+        {
+            _coroutine = StartCoroutine(UpdateVolume(_targetVolume));
         }
     }
 
@@ -94,29 +98,28 @@ public class AudioSiren : MonoBehaviour
     {
         _targetVolume = _minVolume;
 
-        if (_audioSource != null && _audioSource.isPlaying == true)
+        if (_coroutine != null)
         {
+            StopCoroutine(_coroutine);
+
+            _coroutine = null;
+
+            _coroutine = StartCoroutine(UpdateVolume(_targetVolume));
+        }
+    }
+
+    private IEnumerator UpdateVolume(float targetVolume)
+    {
+        while (!Mathf.Approximately(_audioSource.volume, targetVolume))
+        {
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, _lerpVolume * Time.deltaTime);
+            yield return null;
+
             if (_audioSource.volume == _minVolume)
             {
                 _audioSource.Stop();
             }
         }
-    }
-    private void ManageAudioPlayback()
-    {
-        if (_currentState == AudioState.Playing)
-        {
-            PlaySound();
-        }
-        else if (_currentState == AudioState.Stopped)
-        {
-            StopSound();
-        }
-    }
-  
-    private void UpdateVolume(ref AudioSource audioSource)
-    {
-      audioSource.volume = Mathf.MoveTowards(audioSource.volume, _targetVolume, _lerpVolume * Time.deltaTime);
     }
 
     private void OnDestroy()
@@ -124,6 +127,7 @@ public class AudioSiren : MonoBehaviour
         if (_triggerZoneHandler != null)
         {
             _triggerZoneHandler.OnTriggerEntered -= HandleObjectEntered;
+
             _triggerZoneHandler.OnTriggerExited -= HandleObjectExited;
         }
     }

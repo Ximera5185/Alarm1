@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(GroundDetector))]
 [RequireComponent(typeof(InputReader))]
 
-public class Mover : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
     private const float JumpCoefficient = -2f;
 

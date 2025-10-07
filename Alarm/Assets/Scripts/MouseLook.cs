@@ -2,14 +2,6 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    [SerializeField]
-    private enum RotationAxes
-    {
-        MouseXandY = 0,
-        MouseX = 1,
-        MouseY = 2
-    }
-
     [SerializeField] private RotationAxes _axes = RotationAxes.MouseXandY;
 
     [SerializeField] private float _sensitivityHor = 9f;
@@ -18,6 +10,12 @@ public class MouseLook : MonoBehaviour
     [SerializeField] private float _maxVert = 45f;
 
     private float _rotationX = 0f;
+    private enum RotationAxes
+    {
+        MouseXandY = 0,
+        MouseX = 1,
+        MouseY = 2
+    }
 
     private void Update()
     {
@@ -46,7 +44,7 @@ public class MouseLook : MonoBehaviour
             {
                 transform.localEulerAngles = new Vector3(_rotationX, rotationY, 0);
             }
-            else 
+            else
             {
                 float delta = mouseX;
 
