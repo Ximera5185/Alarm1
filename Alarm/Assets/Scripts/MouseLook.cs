@@ -16,7 +16,6 @@ public class MouseLook : MonoBehaviour
         MouseX = 1,
         MouseY = 2
     }
-
     private void Update()
     {
         HandleMouseLook();

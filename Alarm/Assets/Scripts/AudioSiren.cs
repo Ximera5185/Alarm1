@@ -23,7 +23,7 @@ public class AudioSiren : MonoBehaviour
 
     private void Awake()
     {
-        Initialization();
+        Initialization(_minVolume);
     }
 
     void Start()
@@ -31,7 +31,22 @@ public class AudioSiren : MonoBehaviour
         InitializeTriggerZoneHandler();
     }
 
-    private void Initialization()
+    private void HandleObjectEntered(Collider other)
+    {
+        if (other.CompareTag(PlayerTag))
+        {
+            PlaySound(_maxVolume);
+        }
+    }
+    private void HandleObjectExited(Collider other)
+    {
+        if (other.CompareTag(PlayerTag))
+        {
+            StopSound(_minVolume);
+        }
+    }
+
+    private void Initialization(float targetVolume)
     {
         const string PathAudioFile = "Sound/Sirena";
 
@@ -43,7 +58,7 @@ public class AudioSiren : MonoBehaviour
         {
             _audioSource.clip = _audioClip;
 
-            _audioSource.volume = _minVolume;
+            _audioSource.volume = targetVolume;
         }
     }
 
@@ -59,53 +74,46 @@ public class AudioSiren : MonoBehaviour
         }
     }
 
-    private void HandleObjectEntered(Collider other)
+    private void PlaySound(float targetVolume)
     {
-        if (other.CompareTag(PlayerTag))
-        {
-            PlaySound();
-        }
+        SetTargetVolume(targetVolume);
+
+        StopCoroutine();
+
+        _audioSource.Play();
+
+        StartCoroutine();
     }
 
-    private void HandleObjectExited(Collider other)
+    private void StopSound(float targetVolume)
     {
-        if (other.CompareTag(PlayerTag))
-        {
-            StopSound();
-        }
+        SetTargetVolume(targetVolume);
+
+        StopCoroutine();
+
+        StartCoroutine();
     }
 
-    private void PlaySound()
+    private void StopCoroutine()
     {
-        _targetVolume = _maxVolume;
-
         if (_coroutine != null)
         {
             StopCoroutine(_coroutine);
 
             _coroutine = null;
         }
-
-        _audioSource.Play();
-
+    }
+    private void StartCoroutine()
+    {
         if (_coroutine == null)
         {
             _coroutine = StartCoroutine(UpdateVolume(_targetVolume));
         }
     }
 
-    private void StopSound()
+    private void SetTargetVolume(float targetVolume)
     {
-        _targetVolume = _minVolume;
-
-        if (_coroutine != null)
-        {
-            StopCoroutine(_coroutine);
-
-            _coroutine = null;
-
-            _coroutine = StartCoroutine(UpdateVolume(_targetVolume));
-        }
+        _targetVolume = targetVolume;
     }
 
     private IEnumerator UpdateVolume(float targetVolume)
@@ -113,6 +121,7 @@ public class AudioSiren : MonoBehaviour
         while (!Mathf.Approximately(_audioSource.volume, targetVolume))
         {
             _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, _lerpVolume * Time.deltaTime);
+
             yield return null;
 
             if (_audioSource.volume == _minVolume)
