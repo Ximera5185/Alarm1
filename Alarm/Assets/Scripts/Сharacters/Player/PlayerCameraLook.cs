@@ -1,32 +1,35 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseLook : MonoBehaviour
+public class PlayerCameraLook : MonoBehaviour
 {
-    [SerializeField] private RotationAxes _axes = RotationAxes.MouseXandY;
-
-    [SerializeField] private float _sensitivityHor = 9f;
-    [SerializeField] private float _sensitivityVert = 9f;
+    [SerializeField] private InputReader _inputReader;
     [SerializeField] private float _minVert = -45f;
     [SerializeField] private float _maxVert = 45f;
-
     private float _rotationX = 0f;
+    // Start is called before the first frame update
     private enum RotationAxes
     {
         MouseXandY = 0,
         MouseX = 1,
         MouseY = 2
     }
-    private void Update()
+    [SerializeField] private RotationAxes _axes = RotationAxes.MouseXandY;
+    void Start()
     {
-        HandleMouseLook();
+        //_inputReader = GetComponent<InputReader>();
+    _inputReader.OnLook += HandleLookInput;
     }
 
-    private void HandleMouseLook()
+    // Update is called once per frame
+    void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * _sensitivityHor;
+        
+    }
 
-        float mouseY = Input.GetAxis("Mouse Y") * _sensitivityVert;
-
+    private void HandleLookInput(float mouseX, float mouseY)
+    {
         if (_axes == RotationAxes.MouseX)
         {
             transform.Rotate(0, mouseX, 0);

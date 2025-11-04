@@ -1,32 +1,29 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
-
+[RequireComponent(typeof(AudioSource), (typeof(TriggerZoneHandler)))]
 public class AudioSiren : MonoBehaviour
 {
     private const string PlayerTag = "Player";
 
-    [SerializeField] private TriggerZoneHandler _triggerZoneHandler;
+    private const float MinVolume = 0f;
+    private const float MaxVolume = 1f;
 
-    private AudioSource _audioSource;
+    private TriggerZoneHandler _triggerZoneHandler;
+
     private AudioClip _audioClip;
+    private AudioSource _audioSource;
     private Coroutine _coroutine;
 
-    private float _minVolume = 0f;
-    private float _maxVolume = 1f;
     private float _lerpVolume = 0.1f;
     private float _targetVolume;
 
-    private AudioState _currentState = AudioState.Stopped;
-    private enum AudioState { Stopped, Playing }
-
     private void Awake()
     {
-        Initialization(_minVolume);
+        Initialization();
     }
 
-    void Start()
+    private void Start()
     {
         InitializeTriggerZoneHandler();
     }
@@ -35,21 +32,23 @@ public class AudioSiren : MonoBehaviour
     {
         if (other.CompareTag(PlayerTag))
         {
-            PlaySound(_maxVolume);
+            PlaySound();
         }
     }
+
     private void HandleObjectExited(Collider other)
     {
         if (other.CompareTag(PlayerTag))
         {
-            StopSound(_minVolume);
+            StopSound();
         }
     }
 
-    private void Initialization(float targetVolume)
+    private void Initialization()
     {
         const string PathAudioFile = "Sound/Sirena";
 
+        _triggerZoneHandler = GetComponent<TriggerZoneHandler>();
         _audioSource = GetComponent<AudioSource>();
 
         _audioClip = Resources.Load<AudioClip>(PathAudioFile);
@@ -57,26 +56,23 @@ public class AudioSiren : MonoBehaviour
         if (_audioClip != null)
         {
             _audioSource.clip = _audioClip;
-
-            _audioSource.volume = targetVolume;
+            _audioSource.volume = MinVolume;
         }
     }
 
     private void InitializeTriggerZoneHandler()
     {
-        _triggerZoneHandler = GetComponent<TriggerZoneHandler>();
 
         if (_triggerZoneHandler != null)
         {
             _triggerZoneHandler.OnTriggerEntered += HandleObjectEntered;
-
             _triggerZoneHandler.OnTriggerExited += HandleObjectExited;
         }
     }
 
-    private void PlaySound(float targetVolume)
+    private void PlaySound()
     {
-        SetTargetVolume(targetVolume);
+        _targetVolume = MaxVolume;
 
         StopCoroutine();
 
@@ -85,12 +81,11 @@ public class AudioSiren : MonoBehaviour
         StartCoroutine();
     }
 
-    private void StopSound(float targetVolume)
+    private void StopSound()
     {
-        SetTargetVolume(targetVolume);
+        _targetVolume = MinVolume;
 
         StopCoroutine();
-
         StartCoroutine();
     }
 
@@ -103,17 +98,13 @@ public class AudioSiren : MonoBehaviour
             _coroutine = null;
         }
     }
+
     private void StartCoroutine()
     {
         if (_coroutine == null)
         {
             _coroutine = StartCoroutine(UpdateVolume(_targetVolume));
         }
-    }
-
-    private void SetTargetVolume(float targetVolume)
-    {
-        _targetVolume = targetVolume;
     }
 
     private IEnumerator UpdateVolume(float targetVolume)
@@ -124,7 +115,7 @@ public class AudioSiren : MonoBehaviour
 
             yield return null;
 
-            if (_audioSource.volume == _minVolume)
+            if (_audioSource.volume == MinVolume)
             {
                 _audioSource.Stop();
             }
@@ -136,7 +127,6 @@ public class AudioSiren : MonoBehaviour
         if (_triggerZoneHandler != null)
         {
             _triggerZoneHandler.OnTriggerEntered -= HandleObjectEntered;
-
             _triggerZoneHandler.OnTriggerExited -= HandleObjectExited;
         }
     }
