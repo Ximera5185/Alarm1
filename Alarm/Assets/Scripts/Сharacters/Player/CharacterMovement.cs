@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(GroundDetector))]
-[RequireComponent(typeof(InputReader))]
+[RequireComponent(typeof(KeybordMouseInputReader))]
 public class CharacterMovement : MonoBehaviour
 {
     private const float JumpCoefficient = -2f;
@@ -30,7 +30,7 @@ public class CharacterMovement : MonoBehaviour
 
     private CharacterController _characterController;
     private GroundDetector _groundDetector;
-    private InputReader _inputReader;
+    private IinputReader _inputReader;
 
     private Vector3 _velocity;
     private Vector3 _direction;
@@ -45,7 +45,7 @@ public class CharacterMovement : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _groundDetector = GetComponent<GroundDetector>();
-        _inputReader = GetComponent<InputReader>();
+        _inputReader = GetComponent<KeybordMouseInputReader>();
 
         _characterController.detectCollisions = true;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCameraLook : MonoBehaviour
 {
-    [SerializeField] private InputReader _inputReader;
+    [SerializeField] private KeybordMouseInputReader _inputReader;
     [SerializeField] private float _minVert = -45f;
     [SerializeField] private float _maxVert = 45f;
     private float _rotationX = 0f;
@@ -18,7 +18,7 @@ public class PlayerCameraLook : MonoBehaviour
     [SerializeField] private RotationAxes _axes = RotationAxes.MouseXandY;
     void Start()
     {
-        //_inputReader = GetComponent<InputReader>();
+        //_inputReader = GetComponent<KeybordMouseInputReader>();
     _inputReader.OnLook += HandleLookInput;
     }
 

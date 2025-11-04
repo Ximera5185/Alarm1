@@ -402,7 +402,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1020690356}
-  - component: {fileID: 1020690357}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -425,27 +424,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1020690357
+--- !u!114 &1085626402 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020690355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59544fd34fc73964182b99ff28bed62a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1085626400 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7950675344576859439, guid: 893f66ef7b2c5c24d929a428d91019d5, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2805063599563942518, guid: 893f66ef7b2c5c24d929a428d91019d5, type: 3}
   m_PrefabInstance: {fileID: 1468208195}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca2ae1935a20af647b4f647ed5375109, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b47d878a9bebf74c8d8b4163d7f4a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1468208195
@@ -527,6 +514,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4800519003029877516, guid: 893f66ef7b2c5c24d929a428d91019d5, type: 3}
     - {fileID: 791274235583428716, guid: 893f66ef7b2c5c24d929a428d91019d5, type: 3}
+    - {fileID: 7950675344576859439, guid: 893f66ef7b2c5c24d929a428d91019d5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -746,7 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41e61d4c30c03d40b73285582eb2104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputReader: {fileID: 1085626400}
+  _inputReader: {fileID: 1085626402}
   _minVert: -45
   _maxVert: 45
   _axes: 2

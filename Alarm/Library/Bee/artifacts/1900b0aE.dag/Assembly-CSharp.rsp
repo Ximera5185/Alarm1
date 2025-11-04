@@ -381,7 +381,8 @@
 "Assets/Scripts/Сharacters/Player/CharacterAnimator.cs"
 "Assets/Scripts/Сharacters/Player/CharacterMovement.cs"
 "Assets/Scripts/Сharacters/Player/GroundDetector.cs"
-"Assets/Scripts/Сharacters/Player/InputReader.cs"
+"Assets/Scripts/Сharacters/Player/IinputReader.cs"
+"Assets/Scripts/Сharacters/Player/KeybordMouseInputReader.cs"
 "Assets/Scripts/Сharacters/Player/PlayerCameraLook.cs"
 -langversion:9.0
 /deterministic
