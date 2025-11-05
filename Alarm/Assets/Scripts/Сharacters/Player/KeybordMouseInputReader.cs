@@ -87,6 +87,4 @@ public class KeybordMouseInputReader : MonoBehaviour,IinputReader
             OnSprintStop?.Invoke();
         }
     }
-
-   
 }
