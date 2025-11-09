@@ -17,5 +17,21 @@ public class GroundDetector : MonoBehaviour
         Vector3.down,
         out RaycastHit hit,
         _groundDistance,
-        _groundMask);
+        _groundMask
+        );
+
+    private void OnDrawGizmos()
+    {
+        // Устанавливаем цвет Gizmo
+        Gizmos.color = Color.red;
+
+        // Вычисляем верхнюю и нижнюю точки капсулы
+        Vector3 top = transform.position + Vector3.up * (capsuleHeight * CapsuleOffset + capsuleRadius);
+        Vector3 bottom = transform.position + Vector3.up * (capsuleHeight * CapsuleOffset - capsuleRadius);
+
+        // Рисуем капсулу
+        Gizmos.DrawWireSphere(top, capsuleRadius);
+        Gizmos.DrawWireSphere(bottom, capsuleRadius);
+        Gizmos.DrawLine(top, bottom);
+    }
 }

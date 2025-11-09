@@ -35,6 +35,7 @@ public class KeybordMouseInputReader : MonoBehaviour, IinputReader
         ReadLookInput();
         ReadJumpInput();
         ReadCurrentStateLeftShift(LeftShiftKey);
+
     }
 
     private void ReadMovementInput()

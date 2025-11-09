@@ -14,8 +14,9 @@ public class PlayerCameraLook : MonoBehaviour
         MouseX = 1,
         MouseY = 2
     }
+
     [SerializeField] private RotationAxes _axes = RotationAxes.MouseXandY;
-    void Start()
+    void Awake()
     {
         _inputReader.OnLook += HandleLookInput;
     }

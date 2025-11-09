@@ -152,7 +152,10 @@ public class CharacterMovement : MonoBehaviour
         if (_inputReader.IsMoving)
         {
             float targetSpeed = _inputReader.IsMoving ? (_groundDetector.IsGrounded ? (_isSprinting ? _runSpeed : _speed) : _minSpeed) : _minSpeed;
+
             _currentSpeed = Mathf.Lerp(_currentSpeed, targetSpeed, Time.deltaTime * _lerpSpeed);
+
+            //Mathf.SmoothDamp(); использовать для инерции
         }
         else
         {
