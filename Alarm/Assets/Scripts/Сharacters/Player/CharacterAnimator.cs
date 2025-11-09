@@ -15,12 +15,12 @@ public class CharacterAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public void Jump(bool isJumping) 
+    public void Jump(bool isJumping)
     {
-        _animator.SetBool(Jumping,isJumping);
+        _animator.SetBool(Jumping, isJumping);
     }
 
-    public void Move(float deltaX,float deltaZ,float currentSpeed)
+    public void Move(float deltaX, float deltaZ, float currentSpeed)
     {
         _animator.SetFloat(Speed, currentSpeed);
         _animator.SetFloat(HorizontalMove, deltaX);

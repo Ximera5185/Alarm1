@@ -22,7 +22,6 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float _speed = 5;
     [SerializeField] private float _currentSpeed;
     [SerializeField] private float _lerpSpeed = 3;
-    [SerializeField] private float _lerpSpeedInertia = 4f;
     [SerializeField] private float _jumpHeight = 1f;
     [SerializeField] private float _gravity = -50f;
     [SerializeField] private float _minVert = -45f;
@@ -39,7 +38,6 @@ public class CharacterMovement : MonoBehaviour
 
     private bool _isJumping = false;
     private bool _isSprinting = false;
-    //private bool _isMoving = false;
 
     void Start()
     {
@@ -151,10 +149,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        if (_inputReader.IsMoving) 
+        if (_inputReader.IsMoving)
         {
             float targetSpeed = _inputReader.IsMoving ? (_groundDetector.IsGrounded ? (_isSprinting ? _runSpeed : _speed) : _minSpeed) : _minSpeed;
-             _currentSpeed = Mathf.Lerp(_currentSpeed, targetSpeed, Time.deltaTime * _lerpSpeed);
+            _currentSpeed = Mathf.Lerp(_currentSpeed, targetSpeed, Time.deltaTime * _lerpSpeed);
         }
         else
         {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCameraLook : MonoBehaviour
@@ -7,8 +5,9 @@ public class PlayerCameraLook : MonoBehaviour
     [SerializeField] private KeybordMouseInputReader _inputReader;
     [SerializeField] private float _minVert = -45f;
     [SerializeField] private float _maxVert = 45f;
+
     private float _rotationX = 0f;
-    // Start is called before the first frame update
+
     private enum RotationAxes
     {
         MouseXandY = 0,
@@ -18,14 +17,7 @@ public class PlayerCameraLook : MonoBehaviour
     [SerializeField] private RotationAxes _axes = RotationAxes.MouseXandY;
     void Start()
     {
-        //_inputReader = GetComponent<KeybordMouseInputReader>();
-    _inputReader.OnLook += HandleLookInput;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _inputReader.OnLook += HandleLookInput;
     }
 
     private void HandleLookInput(float mouseX, float mouseY)

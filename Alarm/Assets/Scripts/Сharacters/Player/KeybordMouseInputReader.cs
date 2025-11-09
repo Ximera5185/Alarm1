@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class KeybordMouseInputReader : MonoBehaviour,IinputReader
+public class KeybordMouseInputReader : MonoBehaviour, IinputReader
 {
     private const string HorizontalAxis = "Horizontal";
     private const string VerticalAxis = "Vertical";
@@ -20,7 +20,7 @@ public class KeybordMouseInputReader : MonoBehaviour,IinputReader
     public event Action OnJump;
     public event Action OnSprintStart;
     public event Action OnSprintStop;
-    public event Action<float,float> OnLook;
+    public event Action<float, float> OnLook;
     public event Action<Vector3> OnMove;
 
     public float DeltaX { get; private set; }
@@ -37,7 +37,7 @@ public class KeybordMouseInputReader : MonoBehaviour,IinputReader
         ReadCurrentStateLeftShift(LeftShiftKey);
     }
 
-    private void ReadMovementInput() 
+    private void ReadMovementInput()
     {
         DeltaX = Input.GetAxis(HorizontalAxis);
         DeltaZ = Input.GetAxis(VerticalAxis);
@@ -53,7 +53,7 @@ public class KeybordMouseInputReader : MonoBehaviour,IinputReader
         }
     }
 
-    private void ReadLookInput() 
+    private void ReadLookInput()
     {
         float mouseX = Input.GetAxis(MouseX) * _sensitivityHor;
         float mouseY = Input.GetAxis(MouseY) * _sensitivityVert;

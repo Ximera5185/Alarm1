@@ -2,13 +2,11 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-
 public class TriggerZoneHandler : MonoBehaviour
 {
     private const string LayerName = "TrigerZona";
 
     public event Action<Collider> OnTriggerEntered;
-
     public event Action<Collider> OnTriggerExited;
 
     private void Awake()
