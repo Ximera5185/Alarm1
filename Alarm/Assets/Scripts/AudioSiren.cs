@@ -1,11 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource), (typeof(TriggerZoneHandler)))]
+[RequireComponent(typeof(AudioSource), typeof(TriggerZoneHandler))]
 public class AudioSiren : MonoBehaviour
 {
-    private const string PlayerTag = "Player";
-
     private const float MinVolume = 0f;
     private const float MaxVolume = 1f;
 
@@ -20,7 +18,7 @@ public class AudioSiren : MonoBehaviour
 
     private void Awake()
     {
-        Initialization();
+        Initialize();
     }
 
     private void Start()
@@ -30,7 +28,7 @@ public class AudioSiren : MonoBehaviour
 
     private void HandleObjectEntered(Collider other)
     {
-        if (other.CompareTag(PlayerTag))
+        if (other.GetComponent<Player>() != null)
         {
             PlaySound();
         }
@@ -38,13 +36,13 @@ public class AudioSiren : MonoBehaviour
 
     private void HandleObjectExited(Collider other)
     {
-        if (other.CompareTag(PlayerTag))
+        if (other.GetComponent<Player>() != null)
         {
             StopSound();
         }
     }
 
-    private void Initialization()
+    private void Initialize()
     {
         const string PathAudioFile = "Sound/Sirena";
 

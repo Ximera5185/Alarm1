@@ -13,12 +13,7 @@ public class GroundDetector : MonoBehaviour
     public bool IsGrounded => Physics.CapsuleCast(
         transform.position + Vector3.up * (capsuleHeight * CapsuleOffset + capsuleRadius),
         transform.position + Vector3.up * (capsuleHeight * CapsuleOffset - capsuleRadius),
-        capsuleRadius,
-        Vector3.down,
-        out RaycastHit hit,
-        _groundDistance,
-        _groundMask
-        );
+        capsuleRadius,Vector3.down, out RaycastHit hit, _groundDistance,_groundMask);
 
     private void OnDrawGizmos()
     {

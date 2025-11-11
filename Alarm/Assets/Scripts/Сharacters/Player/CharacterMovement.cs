@@ -1,8 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(GroundDetector))]
-[RequireComponent(typeof(KeybordMouseInputReader))]
+[RequireComponent(typeof(CharacterController), typeof(GroundDetector), typeof(KeybordMouseInputReader))]
 public class CharacterMovement : MonoBehaviour
 {
     private const float JumpCoefficient = -2f;

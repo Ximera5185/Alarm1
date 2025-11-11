@@ -11,16 +11,16 @@ public class TriggerZoneHandler : MonoBehaviour
 
     private void Awake()
     {
-        Initialization();
+        Initialize();
     }
 
-    private void Initialization()
+    private void Initialize()
     {
         BoxCollider boxCollider = GetComponent<BoxCollider>();
 
         boxCollider.isTrigger = true;
 
-        gameObject.layer = LayerMask.NameToLayer(LayerName);
+        //gameObject.layer = LayerMask.NameToLayer(LayerName);
     }
 
     private void OnTriggerEnter(Collider other)
